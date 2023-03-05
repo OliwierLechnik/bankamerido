@@ -1,10 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <head>
+      <meta charset="UTF-8">
+      <title>Bank Amerido</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'global.css' %}">
 
-</body>
+
+    </script>
+  </head>
+  <body>
+      <div class="navbar navbar-expand-lg bg-primary">
+          <div class="navbar-brand">
+              AMERIDO
+          </div>
+          <a class="btn" href="../logout/" >logout</a>
+      </div>
+      <div class="container ">
+          {% block content %}
+          {% endblock %}
+      </div>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
 </html>
