@@ -8,7 +8,12 @@ from django.contrib import messages
 def login_view(req):
     if req.user.is_authenticated:
         return redirect('home/')
-    form = LoginForm(req, data=req.POST)
+    form = LoginForm(req, data=req.POST or None)
+    data = {
+        'akcja': 'Logowanie',
+        'form': form,
+        'text': 'Nie masz konta? <a href="register/">Załóż je!</a>'
+    }
     if form.is_valid():
         cleaned = form.cleaned_data
         name = cleaned.get('username')
@@ -16,11 +21,12 @@ def login_view(req):
         user = authenticate(username=name, password=passwd)
         if user is not None:
             login(req, user)
+            print('suka')
             return redirect('home/')
-    data = {
-        'akcja': 'logowanie',
-        'form': form,
-    }
+    else:
+        if not req.POST:
+            form.error_messages = []
+
 
     if req.user.is_authenticated:
         return redirect('home/')
@@ -41,7 +47,8 @@ def register_view(req):
         form.save()
         return redirect('../')
     data = {
-        'akcja': 'rejestracja',
-        'form': form
+        'akcja': 'Rejestracja',
+        'form': form,
+        'text': 'Masz konto? <a href="../">Zaloguj się!</a>'
     }
     return render(req, 'login.html', data)
