@@ -6,7 +6,7 @@ body {
 
 #box{
     position: absolute;
-    top: 36%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -33,11 +33,34 @@ input{
     color: #ff3333
 }
 
-.navbar {
-    background-color: #333333;
-}
-
 .footext {
     text-align: center;
     color: #eeeeee;
+}
+
+.home-box {
+    color: #eeeeee;
+}
+
+.go {
+    color: #8aff80
+}
+
+.navbar * {
+    color: #eeeeee;
+}
+.navbar {
+    border-bottom: dotted #eeeeee;
+}
+
+.navbar-center{
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+    font-size: 2.5rem;
+    letter-spacing: 0.5rem;
+}
+
+logo {
+   color: #eeeeee;
 }

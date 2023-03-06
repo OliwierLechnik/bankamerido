@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12 row">
+        <div class="col-md-4 d-none d-md-block">
+        </div>
+        <div class="col-md-4 col-12">
+            <form action="" method="POST"> {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Poproś o otwarcie rachunku."/>
+            </form>
+        </div>
+        <div class="col-md-4 d-none d-md-block">
+        </div>
+    </div>
+{% endblock %}

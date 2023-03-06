@@ -7,7 +7,7 @@ from django.contrib import messages
 # Create your views here.
 def login_view(req):
     if req.user.is_authenticated:
-        return redirect('home/')
+        return redirect('account/')
     form = LoginForm(req, data=req.POST or None)
     data = {
         'akcja': 'Logowanie',
@@ -22,26 +22,26 @@ def login_view(req):
         if user is not None:
             login(req, user)
             print('suka')
-            return redirect('home/')
+            return redirect('account/')
     else:
         if not req.POST:
             form.error_messages = []
 
 
     if req.user.is_authenticated:
-        return redirect('home/')
+        return redirect('account/')
     return render(req, 'login.html', data)
 
 
 def logout_view(req):
     if not req.user.is_authenticated:
-        return redirect('../')
+        return redirect('/')
     logout(req)
-    return redirect('../')
+    return redirect('/')
 
 def register_view(req):
     if req.user.is_authenticated:
-        return redirect('../home/')
+        return redirect('../account/')
     form = NewUser(req.POST or None)
     if form.is_valid():
         form.save()

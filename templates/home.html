@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    dom {{ user }}
+    <div class="col-12 text-center">
+        <h1>Wybierz dostępne rachunki</h1>
+    </div>
+    <div class="col-12 row">
+       <div class="col-12 col-sm-6">
+           {% for acc in accs %}
+           <a href="{{ acc.id }}/">{{ acc.name }}</a>
+           {% endfor %}
+       </div>
+       <div class="col-12 col-sm-6">
+           <a href="new/">nowy rachunek</a>
+       </div>
+    </div>
 {% endblock %}
