@@ -11,10 +11,12 @@ def account_picker_view(req):
         return redirect('/')
 
     querry = Account.objects.filter(owner = req.user.username, active=True)
+    off = Account.objects.filter(owner = req.user.username, active=False)
 
     data = {
         'user': req.user,
         'accs': querry,
+        'waiting': off,
     }
     print(querry)
     return render(req, 'home.html', data)

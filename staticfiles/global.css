@@ -4,12 +4,7 @@ body {
     background-color: #111111;
 }
 
-#box{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+
 
 #loginbox{
     color: #eeeeee;
@@ -43,21 +38,36 @@ input{
 }
 
 .go {
-    color: #8aff80
+    color: #8aff80;
 }
 
 .navbar * {
     color: #eeeeee;
 }
 
-.navbar-center{
-    position: absolute;
-    left: 50%;
-    transform: translatex(-50%);
-    font-size: 2.5rem;
-    letter-spacing: 0.5rem;
+.tabela {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-style: none;
+    border-color: #eeeeee
+    margin: 0;
 }
 
-logo {
-   color: #eeeeee;
+.inactive-acc {
+    color: #999999;
+}
+
+.pickme {
+    display: block:
+    border-radius: 25px;
+    border: 1px solid #8aff80;
+    padding: 0.35rem;
+    color: #8aff80;
+    font-weight: bold;
+    text-decoration:none;
+}
+
+.bolt {
+    font-weight: bold;
 }

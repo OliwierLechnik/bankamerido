@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
       <meta charset="UTF-8">
+      <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
       <title>Bank Amerido</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'global.css' %}">
@@ -17,13 +18,12 @@
                   <img src="{% static 'icon-dark.png' %}"  />
                   <h3>CKBN</h3>
               </a>
-              <h1 class="navbar-center">AMERIDO</h1>
               <a href="/logout/">
                   <img src="{% static 'logout-dark.png' %}"></img>
               </a>
           </div>
       </nav>
-      <div class="container home-box">
+      <div class="container container-fluid col-sm-12 col-md-8 col-lg-6 p-4 home-box">
           {% block content %}
           {% endblock %}
       </div>

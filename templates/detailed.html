@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {{ acc.owner }} {{ acc.id }} {{ acc.balance }} {{ acc.name }} {{ acc.active }}
+    <div class="col-12">
+        <p>nazwa konta</p>
+    </div>
+   <div class="row mt-3">
+       <div class="col-6 bolt"><p>saldo</p></div>
+       <div class="col-6 bolt text-center"><p>{{ acc.balance}}A</p></div>
+   </div>
+   <div class="row mt-3">
+       <div class="col-6 bolt"><p>saldo</p></div>
+       <div class="col-6 bolt text-center"><p>{{ acc.balance}}A</p></div>
+   </div>
+   <div class="row mt-3">
+       <div class="col-6 bolt"><p>saldo</p></div>
+       <div class="col-6 bolt text-center"><p>{{ acc.balance}}A</p></div>
+   </div>
 {% endblock %}
