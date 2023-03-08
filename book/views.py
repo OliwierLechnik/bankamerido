@@ -24,4 +24,8 @@ def regular_transfer_view(req, acc_id):
         pass
 
     return render(req, 'transfer.html', data)
+
+
+def regular_confirmation_view(req):
+    pass
     

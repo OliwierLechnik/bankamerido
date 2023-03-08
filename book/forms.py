@@ -7,7 +7,7 @@ from account.choises import get_choises
 class RegularTransferForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
-        choices=get_choises(),
+        choices=[('', 'Wybierz odbiorce:')] + get_choises(),
         required=True
         )
     title = forms.CharField(

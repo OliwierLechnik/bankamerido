@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="col-12 row">
-        <div class="col-md-4 d-none d-md-block">
-        </div>
-        <div class="col-md-4 col-12">
+        <div class="row">
             <form action="" method="POST"> {% csrf_token %}
 
                 {% for field in form %}
@@ -15,5 +12,4 @@
         </div>
         <div class="col-md-4 d-none d-md-block">
         </div>
-    </div>
 {% endblock %}

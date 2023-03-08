@@ -10,7 +10,7 @@ def get_choises() -> list[tuple[str,str]]:
     for acc in accs:
         own = acc.owner
         user = users.get(username=own)
-        sets.append((acc.id, f'{user.first_name} {user.last_name} {acc.name}'))
+        sets.append((acc.id, f'{user.first_name} {user.last_name} - {acc.name}'))
 
     return sets
 
