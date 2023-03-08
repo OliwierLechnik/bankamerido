@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12 row">
+        <div class="col-md-4 d-none d-md-block">
+        </div>
+        <div class="col-md-4 col-12">
+            <form action="" method="POST"> {% csrf_token %}
+                {{ form.acc }}
+                <input type="submit" class=" go text-center" value="Przelew."/>
+            </form>
+        </div>
+        <div class="col-md-4 d-none d-md-block">
+        </div>
+    </div>
+{% endblock %}

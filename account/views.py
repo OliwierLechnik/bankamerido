@@ -32,7 +32,7 @@ def account_create_view(req):
     if form.is_valid():
         acc = Account.objects.create(owner=req.user.username, name=form.cleaned_data.get('name'))
         return redirect('/account/')
-    return render(req, 'new.html', data)
+    return render(req, 'newAcc.html', data)
 
 
 def account_detailed_view(req, acc_id):

@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
+
 # Create your views here.
 def login_view(req):
     if req.user.is_authenticated:
@@ -21,12 +22,10 @@ def login_view(req):
         user = authenticate(username=name, password=passwd)
         if user is not None:
             login(req, user)
-            print('suka')
             return redirect('account/')
     else:
         if not req.POST:
             form.error_messages = []
-
 
     if req.user.is_authenticated:
         return redirect('account/')
@@ -38,6 +37,7 @@ def logout_view(req):
         return redirect('/')
     logout(req)
     return redirect('/')
+
 
 def register_view(req):
     if req.user.is_authenticated:

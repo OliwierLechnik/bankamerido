@@ -6,8 +6,11 @@
         </div>
         <div class="col-md-4 col-12">
             <form action="" method="POST"> {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Poproś o otwarcie rachunku."/>
+
+                {% for field in form %}
+                <div class="col-sm-6 col-12 mb-4 mb-sm-3">{{field}}</div>
+                {% endfor %}
+                <input type="submit" class=" go text-center" value="Poproś o otwarcie rachunku."/>
             </form>
         </div>
         <div class="col-md-4 d-none d-md-block">
