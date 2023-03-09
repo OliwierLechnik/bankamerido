@@ -78,6 +78,18 @@ ul{
     color: #8aff80;
     font-weight: bold;
     text-decoration:none;
+    line-height: 3rem;
+}
+
+.super_pickme {
+    display: block:
+    border-radius: 25px;
+    border: 1px solid #5B8FFF;
+    padding: 0.35rem;
+    color: #5B8FFF;
+    font-weight: bold;
+    text-decoration:none;
+    line-height: 3rem;
 }
 
 .history {
@@ -88,6 +100,7 @@ ul{
     color: #999999;
     font-weight: bold;
     text-decoration:none;
+    line-height: 3rem;
 }
 
 .bolt {
@@ -100,4 +113,8 @@ ul{
 
 .out {
     color: #F55050;
+}
+
+.druczek {
+    font-size: 0.65rem;
 }

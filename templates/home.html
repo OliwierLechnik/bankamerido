@@ -10,7 +10,11 @@
    </div>
    {% for acc in accs %}
    <div class="row tabela mt-3">
+       {% if acc.super %}
+       <div class="col-8"><a href="{{ acc.id }}" class="super_pickme">{{ acc.name }}</a></div>
+       {% else %}
        <div class="col-8"><a href="{{ acc.id }}" class="pickme">{{ acc.name }}</a></div>
+       {% endif %}
        <div class="col-4 bolt text-center"><p>{{ acc.balance}}A</p></div>
    </div>
    {% endfor %}
@@ -21,6 +25,7 @@
    </div>
    {% endfor %}
    <div class="col-12 col-sm-6 mt-3 text-center">
+
        <a href="new/" class="pickme">Nowy rachunek</a>
    </div>
 {% endblock %}

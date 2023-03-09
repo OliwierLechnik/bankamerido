@@ -52,6 +52,14 @@ def account_detailed_view(req, acc_id):
     outgoing = Book.objects.filter(sender_id = acc_id)
     incoming = Book.objects.filter(receiver_id = acc.id)
 
+    slownik = {
+        'regular_transfer': 'Przelew',
+        'super_transfer': 'Zajęcie komornicze',
+        'deposit': 'Wpłata',
+        'withdraw': 'Wypłata',
+        'debt_collection': 'Windykacja',
+    }
+
     history = []
     for transfer in incoming:
         target = Account.objects.get(id = transfer.sender_id)
@@ -63,7 +71,8 @@ def account_detailed_view(req, acc_id):
                 'subtitle': subtitle,
                 'date': datetime.strftime(transfer.date, '%d-%m-%Y'),
                 'value': f'<p class="in">{transfer.value}A</p>',
-                'id': transfer.id
+                'id': transfer.id,
+                'type': slownik.get(transfer.type)
             }
         )
 
@@ -77,27 +86,56 @@ def account_detailed_view(req, acc_id):
                 'subtitle': subtitle,
                 'date': datetime.strftime(transfer.date, '%d-%m-%Y'),
                 'value': f'<p class="out">-{transfer.value}A</p>',
-                'id': transfer.id
+                'id': transfer.id,
+                'type': slownik.get(transfer.type)
             }
         )
 
     history = sorted(history, key = lambda x: x.get('id'), reverse=True)
 
-    options = {
+    opcje = [
+        {
+            'name': 'Przelew',
+            'address': 'transfer/'
+        },
+    ]
 
-    }
-
-    super_options = {
-
-    }
+    super_opcje = [
+        {
+            'name': 'Windykacja',
+            'address': 'debt_collection/'
+        },
+        {
+            'name': 'Super Przelew',
+            'address': 'super_transfer/'
+        },
+        {
+            'name': 'Wypłata',
+            'address': 'withdraw/'
+        },
+        {
+            'name': 'Wpłata',
+            'address': 'deposit/'
+        },
+    ]
 
     data = {
         'acc': acc,
         'name': f'{req.user.first_name} {req.user.last_name} - {acc.name}',
-        'history': history
+        'history': history,
+        'opcje': opcje,
+        'super_opcje': super_opcje,
     }
     return render(req, 'detailed.html', data)
 
 
+def accept_account_view(req, acc_id):
 
+    rachunki = Account.objects.filter(active = False)
+
+    data = {
+
+    }
+
+    return render(req, 'accept_account.html', data)
 

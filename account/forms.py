@@ -5,3 +5,4 @@ class AccountCreationForm(ModelForm):
     class Meta:
         model = Account
         fields = ['name']
+
