@@ -25,7 +25,10 @@
    </div>
    {% endfor %}
    <div class="col-12 col-sm-6 mt-3 text-center">
-
        <a href="new/" class="pickme">Nowy rachunek</a>
+       {% if super %}
+       <a href="accept_account/" class="super_pickme">Proźby o rachunek</a>
+       <a href="all_accounts/" class="super_pickme">Wszystkie rachunki</a>
+       {% endif %}
    </div>
 {% endblock %}

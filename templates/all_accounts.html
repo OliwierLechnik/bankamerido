@@ -6,11 +6,11 @@
     </div>
    <div class="row historia mt-4">
        {% for k in konta %}
-       <div class="col-8 mt-3">
-           <p class="inactive-acc">{{ k.name }}</p>
+       <div class="col-8 mt-3 bolt">
+           {{ k.name }}
        </div>
        <div class="col-4 mt-3">
-           <a href="?id={{k.id}}&action=yes" class="pickme me-3">Tak</a><a href="?id={{k.id}}&action=no" class="red-pickme">Nie</a>
+           {{ k.balance }}A
        </div>
        {% endfor %}
    </div>

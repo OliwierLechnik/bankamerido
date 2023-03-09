@@ -11,6 +11,8 @@ def get_choises() -> list[tuple[str,str]]:
     sets = []
     for acc in accs:
         own = acc.owner
+        if own == 'admin':
+            continue
         user = users.get(username=own)
         sets.append((acc.id, f'{user.first_name} {user.last_name} - {acc.name}'))
 

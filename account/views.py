@@ -21,6 +21,7 @@ def account_picker_view(req):
         'name': f'{req.user.first_name} {req.user.last_name}',
         'accs': querry,
         'waiting': off,
+        'super': req.user.is_superuser
     }
     print(querry)
     return render(req, 'home.html', data)
@@ -129,13 +130,61 @@ def account_detailed_view(req, acc_id):
     return render(req, 'detailed.html', data)
 
 
-def accept_account_view(req, acc_id):
+def accept_account_view(req):
+
+    id = req.GET.get('id')
+    action = req.GET.get('action')
+
+    if id is not None and action is not None:
+        target = get_object_or_404(Account,id=id)
+        if not target.active:
+            if action == 'yes':
+                target.active = True;
+                target.save()
+            elif action == 'no':
+                target.delete()
+
 
     rachunki = Account.objects.filter(active = False)
 
-    data = {
+    if not req.user.is_superuser:
+        return redirect('/')
 
+    pary = []
+    for r in rachunki:
+        owner = User.objects.get(username=r.owner)
+        pary.append(
+            {
+                'name': f'{owner.first_name} {owner.last_name} - {r.name}',
+                'id': r.id
+            }
+        )
+
+    data = {
+        'konta': pary
     }
 
     return render(req, 'accept_account.html', data)
 
+
+def all_accounts_view(req):
+
+    rachunki = Account.objects.filter(active=True)
+
+    if not req.user.is_superuser:
+        return redirect('/')
+
+    pary = []
+    for r in rachunki:
+        owner = User.objects.get(username=r.owner)
+        pary.append(
+            {
+                'name': f'{owner.first_name} {owner.last_name} - {r.name}',
+                'balance': r.balance
+            }
+        )
+    data = {
+        'konta': pary,
+    }
+
+    return render(req, 'all_accounts.html', data)

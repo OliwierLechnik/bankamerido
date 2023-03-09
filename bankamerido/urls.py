@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from login.views import login_view, register_view, logout_view
-from account.views import account_picker_view, account_create_view, account_detailed_view
+from account.views import account_picker_view, account_create_view, account_detailed_view, all_accounts_view, accept_account_view
 from book.views import regular_transfer_view, whole_history_view, debt_collection_view, money_withdraw_view, money_deposit_view, super_transfer_view
 
 urlpatterns = [
@@ -31,6 +31,8 @@ urlpatterns = [
     path('account/<int:acc_id>/withdraw/', money_withdraw_view),
     path('account/<int:acc_id>/deposit/', money_deposit_view),
     path('account/<int:acc_id>/super_transfer/', super_transfer_view),
+    path('account/all_accounts/', all_accounts_view),
+    path('account/accept_account/', accept_account_view),
     path('account/<int:acc_id>/history/', whole_history_view),
     path('account/<int:acc_id>/transfer/', regular_transfer_view),
     path('logout/', logout_view)
