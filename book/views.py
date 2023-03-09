@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
-from .forms import RegularTransferForm, DebtCollectionForm, MoneyDepositForm, MoneyWithdrawForm, SuperTransferForm
+from .forms import RegularTransferForm, DebtCollectionForm, MoneyDepositForm, MoneyWithdrawForm, SuperTransferForm, get_choises
 from account.models import Account
 from .transfer_handler import universal_handler
 from django.contrib.auth.models import User
@@ -91,7 +91,7 @@ def debt_collection_view(req, acc_id):
     if not req.user.username == acc.owner:
         return redirect('/')
 
-    form = DebtCollectionForm(req.POST or None)
+    form = RegularTransferForm(req.POST or None)
     data = {
         'form': form,
         'akcja': 'Windykacja'
@@ -123,7 +123,7 @@ def money_withdraw_view(req, acc_id):
     if not req.user.username == acc.owner:
         return redirect('/')
 
-    form = MoneyWithdrawForm(req.POST or None)
+    form = RegularTransferForm(req.POST or None)
     data = {
         'form': form,
         'akcja': 'Wypłata środków'
@@ -147,8 +147,9 @@ def money_withdraw_view(req, acc_id):
 
 
 def money_deposit_view(req, acc_id):
-    acc = get_object_or_404(Account, id=acc_id)
+    form = RegularTransferForm(req.POST or None)
 
+    acc = Account.objects.get(id=acc_id)
     if not req.user.is_authenticated:
         return redirect('/')
     if not acc.super:

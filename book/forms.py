@@ -43,11 +43,10 @@ class RegularTransferForm(forms.Form):
             },
         )
     )
-    fields = [
-        'acc',
-        'title',
-        'value'
-    ]
+
+    def __int__(self, *args, **kwargs):
+        super(RegularTransferForm, self).__init__(*args, **kwargs)
+        self.fields['acc'] = forms.ChoiceField(choices=get_choises())
 
 class SuperTransferForm(forms.Form):
     source = forms.ChoiceField(
@@ -78,12 +77,11 @@ class SuperTransferForm(forms.Form):
             },
         )
     )
-    fields = [
-        'source',
-        'destination',
-        'title',
-        'value'
-    ]
+
+    def __int__(self, *args, **kwargs):
+        super(SuperTransferForm, self).__init__(*args, **kwargs)
+        self.fields['source'] = forms.ChoiceField(choices=get_choises())
+        self.fields['destination'] = forms.ChoiceField(choices=get_choises())
 
 class DebtCollectionForm(forms.Form):
     acc = forms.ChoiceField(
@@ -109,12 +107,9 @@ class DebtCollectionForm(forms.Form):
             },
         )
     )
-    fields = [
-        'acc',
-        'title',
-        'value'
-    ]
-
+    def __int__(self, *args, **kwargs):
+        super(DebtCollectionForm, self).__init__(*args, **kwargs)
+        self.fields['acc'] = forms.ChoiceField(choices=get_choises())
 class MoneyWithdrawForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
@@ -134,6 +129,9 @@ class MoneyWithdrawForm(forms.Form):
         'acc',
         'value'
     ]
+    def __int__(self, choises, *args, **kwargs):
+        super(MoneyWithdrawForm, self).__init__(*args, **kwargs)
+        self.fields['acc'].choises = choises
 class MoneyDepositForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
@@ -149,8 +147,7 @@ class MoneyDepositForm(forms.Form):
             },
         )
     )
-    fields = [
-        'acc',
-        'value'
-    ]
 
+    def __int__(self, *args, **kwargs):
+        super(MoneyDepositForm, self).__init__(*args, **kwargs)
+        self.fields['acc'] = forms.ChoiceField(choices=get_choises())
