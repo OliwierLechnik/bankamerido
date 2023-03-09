@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row">
+    <div class="col-12 text-center">
+        <h1 class="bolt">{{ name }}</h1>
+    </div>
+    <div class="row mt-5">
         <form action="" method="POST"> {% csrf_token %}
             {% for field in form %}
             <div class="col-sm-6 col-12 mb-4 mb-sm-3">{{field}}</div>
             {% endfor %}
+            <ul>
+                {% for k,err in form.errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+                {% if not error == '' %}
+                <li>{{ error }}</li>
+                {% endif %}
+            </ul>
             <input type="submit" class=" go text-center" value="Przelew."/>
         </form>
     </div>

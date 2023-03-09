@@ -2,18 +2,36 @@
 
 {% block content %}
     <div class="col-12 text-center">
-        <h1 class="bolt">{{ acc.name }}</h1>
+        <h1 class="bolt">{{ name }}</h1>
     </div>
    <div class="row text-center mt-5">
        <div class="col-6 bolt"><p class="h2">Saldo:</p></div>
        <div class="col-6 bolt text-center"><p class="h2">{{ acc.balance}}A</p></div>
    </div>
-   <div class="opcje text-center mt-5">
-       <a href="transfer/" class="pickme">przelew</a>
+   <div class="opcje text-start mt-5">
+       {% if acc.super %}
+       <a href="history/" class="history me-3">Historia</a>
+       {% endif %}
+       <a href="transfer/" class="pickme me-3">Przelew</a>
    </div>
-   <div class="row historia">
-       {% for his in hist %}
-       <div class=""></div>
+   <div class="row historia mt-4">
+       {% for his in history %}
+       <div class="col-8">
+           <div class="col-12 bolt overflow-hidden">
+               {{ his.title | title }}
+           </div>
+           <div class="col-12">
+                <p class="inactive-acc">{{ his.subtitle }}</p>
+           </div>
+       </div>
+       <div class="col-4">
+           <div class="col-12">
+                {{ his.date }}
+           </div>
+           <div class="col-12">
+                {{ his.value | safe }}
+           </div>
+       </div>
        {% endfor %}
    </div>
 {% endblock %}

@@ -35,9 +35,9 @@ select{
     border-color: #eeeeee
 }
 
-#loginbox ul{
+ul{
     list-style: none;
-    color: #ff3333
+    color: #F55050;
 }
 
 .footext {
@@ -80,6 +80,24 @@ select{
     text-decoration:none;
 }
 
+.history {
+    display: block:
+    border-radius: 25px;
+    border: 1px solid #999999;
+    padding: 0.35rem;
+    color: #999999;
+    font-weight: bold;
+    text-decoration:none;
+}
+
 .bolt {
     font-weight: bold;
+}
+
+.in {
+    color: #8aff80;
+}
+
+.out {
+    color: #F55050;
 }

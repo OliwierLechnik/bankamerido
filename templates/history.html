@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12 text-center">
+        <h1 class="bolt">Historia tranzakcji</h1>
+    </div>
+   <div class="row historia mt-4">
+       {% for his in history %}
+       <div class="col-8 mt-3">
+           <div class="col-12 bolt overflow-hidden">
+               {{ his.title | title }}
+           </div>
+           <div class="col-12 inactive-acc">
+                {{ his.sender }}
+           </div>
+           <div class="col-12 inactive-acc">
+                {{ his.receiver }}
+           </div>
+       </div>
+       <div class="col-4 mt-3">
+           <div class="col-12">
+                {{ his.date }}
+           </div>
+           <div class="col-12 out">
+                -{{ his.value | safe }}A
+           </div>
+           <div class="col-12 in">
+                {{ his.value | safe }}A
+           </div>
+       </div>
+       {% endfor %}
+   </div>
+{% endblock %}

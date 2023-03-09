@@ -12,14 +12,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Account',
+            name='Book',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('owner', models.CharField(max_length=127)),
-                ('name', models.CharField(max_length=127)),
-                ('balance', models.IntegerField(default=0)),
-                ('active', models.BooleanField(default=False)),
-                ('super', models.BooleanField(default=False)),
+                ('sender_id', models.IntegerField()),
+                ('receiver_id', models.IntegerField()),
+                ('type', models.CharField(max_length=127)),
+                ('title', models.CharField(max_length=127)),
+                ('value', models.IntegerField()),
+                ('date', models.DateField(blank=True, null=True)),
             ],
         ),
     ]
