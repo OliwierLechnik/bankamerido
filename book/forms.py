@@ -1,28 +1,9 @@
 from django import forms
-from .models import Book
-from django.db.models.fields import BLANK_CHOICE_DASH
-from account.models import Account
-from django.contrib.auth.models import User
-
-def get_choises() -> list[tuple[str,str]]:
-    accs = Account.objects.filter(active=True)
-    users = User.objects.all()
-
-    sets = []
-    for acc in accs:
-        own = acc.owner
-        if own == 'admin':
-            continue
-        user = users.get(username=own)
-        sets.append((acc.id, f'{user.first_name} {user.last_name} - {acc.name}'))
-
-    return sets
-
 
 class RegularTransferForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
-        choices=[('', 'Wybierz odbiorce:')] + get_choises(),
+        choices=[('', 'Wybierz odbiorce:')],
         required=True
         )
     title = forms.CharField(
@@ -43,20 +24,16 @@ class RegularTransferForm(forms.Form):
             },
         )
     )
-
-    def __int__(self, *args, **kwargs):
-        super(RegularTransferForm, self).__init__(*args, **kwargs)
-        self.fields['acc'] = forms.ChoiceField(choices=get_choises())
 
 class SuperTransferForm(forms.Form):
     source = forms.ChoiceField(
         label='Konto docelowe',
-        choices=[('', 'Wybierz źródło:')] + get_choises(),
+        choices=[('', 'Wybierz źródło:')],
         required=True
         )
     destination = forms.ChoiceField(
         label='Konto docelowe',
-        choices=[('', 'Wybierz cel:')] + get_choises(),
+        choices=[('', 'Wybierz cel:')],
         required=True
         )
     title = forms.CharField(
@@ -77,16 +54,11 @@ class SuperTransferForm(forms.Form):
             },
         )
     )
-
-    def __int__(self, *args, **kwargs):
-        super(SuperTransferForm, self).__init__(*args, **kwargs)
-        self.fields['source'] = forms.ChoiceField(choices=get_choises())
-        self.fields['destination'] = forms.ChoiceField(choices=get_choises())
 
 class DebtCollectionForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
-        choices=[('', 'Wybierz Dłużnika:')] + get_choises(),
+        choices=[('', 'Wybierz Dłużnika:')],
         required=True
         )
     title = forms.CharField(
@@ -107,13 +79,11 @@ class DebtCollectionForm(forms.Form):
             },
         )
     )
-    def __int__(self, *args, **kwargs):
-        super(DebtCollectionForm, self).__init__(*args, **kwargs)
-        self.fields['acc'] = forms.ChoiceField(choices=get_choises())
+
 class MoneyWithdrawForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
-        choices=[('', 'Docelowe konto:')] + get_choises(),
+        choices=[('', 'Docelowe konto:')],
         required=True
         )
     value = forms.IntegerField(
@@ -125,17 +95,10 @@ class MoneyWithdrawForm(forms.Form):
             },
         )
     )
-    fields = [
-        'acc',
-        'value'
-    ]
-    def __int__(self, choises, *args, **kwargs):
-        super(MoneyWithdrawForm, self).__init__(*args, **kwargs)
-        self.fields['acc'].choises = choises
 class MoneyDepositForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
-        choices=[('', 'Docelowe konto:')] + get_choises(),
+        choices=[('', 'Docelowe konto:')],
         required=True
         )
     value = forms.IntegerField(
@@ -147,7 +110,3 @@ class MoneyDepositForm(forms.Form):
             },
         )
     )
-
-    def __int__(self, *args, **kwargs):
-        super(MoneyDepositForm, self).__init__(*args, **kwargs)
-        self.fields['acc'] = forms.ChoiceField(choices=get_choises())

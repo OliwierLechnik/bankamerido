@@ -1,11 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
-from .forms import RegularTransferForm, DebtCollectionForm, MoneyDepositForm, MoneyWithdrawForm, SuperTransferForm, get_choises
+from .forms import RegularTransferForm, DebtCollectionForm, MoneyDepositForm, MoneyWithdrawForm, SuperTransferForm
 from account.models import Account
 from .transfer_handler import universal_handler
 from django.contrib.auth.models import User
 from datetime import datetime
+from django import forms
+from django.db.models.fields import BLANK_CHOICE_DASH
 
+
+def get_choises(name:str) -> list[tuple[str,str]]:
+    accs = Account.objects.filter(active=True)
+    users = User.objects.all()
+
+    sets = []
+    for acc in accs:
+        own = acc.owner
+        if own == 'admin':
+            continue
+        user = users.get(username=own)
+        sets.append((acc.id, f'{user.first_name} {user.last_name} - {acc.name}'))
+
+    return [('', f'{name}:')]+sets
 
 # Create your views here.
 def regular_transfer_view(req, acc_id):
@@ -20,6 +36,7 @@ def regular_transfer_view(req, acc_id):
         return redirect('/')
 
     form = RegularTransferForm(req.POST or None)
+    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto docelowe'))
     data = {
         'form': form,
         'name': f'{req.user.first_name} {req.user.last_name} - {acc.name}',
@@ -91,7 +108,8 @@ def debt_collection_view(req, acc_id):
     if not req.user.username == acc.owner:
         return redirect('/')
 
-    form = RegularTransferForm(req.POST or None)
+    form = DebtCollectionForm(req.POST or None)
+    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto Docelowe'))
     data = {
         'form': form,
         'akcja': 'Windykacja'
@@ -123,7 +141,8 @@ def money_withdraw_view(req, acc_id):
     if not req.user.username == acc.owner:
         return redirect('/')
 
-    form = RegularTransferForm(req.POST or None)
+    form = MoneyWithdrawForm(req.POST or None)
+    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto Docelowe'))
     data = {
         'form': form,
         'akcja': 'Wypłata środków'
@@ -147,7 +166,6 @@ def money_withdraw_view(req, acc_id):
 
 
 def money_deposit_view(req, acc_id):
-    form = RegularTransferForm(req.POST or None)
 
     acc = Account.objects.get(id=acc_id)
     if not req.user.is_authenticated:
@@ -157,7 +175,9 @@ def money_deposit_view(req, acc_id):
     if not req.user.username == acc.owner:
         return redirect('/')
 
+
     form = MoneyDepositForm(req.POST or None)
+    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto Docelowe'))
     data = {
         'form': form,
         'akcja': 'Wpłata środków'
@@ -192,6 +212,8 @@ def super_transfer_view(req, acc_id):
         return redirect('/')
 
     form = SuperTransferForm(req.POST or None)
+    form.fields['source'] = forms.ChoiceField(choices=get_choises('Wybierz źródło'))
+    form.fields['destination'] = forms.ChoiceField(choices=get_choises('Wybierz odbiorce'))
     data = {
         'form': form,
         'name': f'{req.user.first_name} {req.user.last_name} - {acc.name}',
