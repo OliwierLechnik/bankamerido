@@ -23,7 +23,6 @@ def account_picker_view(req):
         'waiting': off,
         'super': req.user.is_superuser
     }
-    print(querry)
     return render(req, 'home.html', data)
 
 
@@ -50,6 +49,7 @@ def account_detailed_view(req, acc_id):
         return redirect('/')
 
     # history
+
     outgoing = Book.objects.filter(sender_id = acc_id)
     incoming = Book.objects.filter(receiver_id = acc.id)
 
