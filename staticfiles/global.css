@@ -87,7 +87,10 @@ ul{
     font-size: 1.333rem;
 }
 .tabela-title {
-    padding-top: 0.5rem;
+    padding-top: 1rem;
+}
+.col-12.col-sm-auto.mt-3.text-center {
+    padding-top: 2rem;
 }
 .col-8.bolt > p {
     position: relative;
