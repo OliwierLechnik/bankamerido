@@ -20,7 +20,7 @@ input{
     border-right: 0;
     outline: none;
     border-style: dotted;
-    border-color: #eeeeee
+    border-color: #eeeeee;
 }
 select{
     display: block;
@@ -32,7 +32,7 @@ select{
     border-right: 0;
     outline: none;
     border-style: dotted;
-    border-color: #eeeeee
+    border-color: #eeeeee;
 }
 
 ul{
@@ -62,7 +62,7 @@ ul{
     border-left: 0;
     border-right: 0;
     border-style: none;
-    border-color: #eeeeee
+    border-color: #eeeeee;
     margin: 0;
 }
 
@@ -71,7 +71,7 @@ ul{
 }
 
 .pickme {
-    display: block:
+    display: block;
     border-radius: 25px;
     border: 1px solid #8aff80;
     padding: 0.35rem;
@@ -82,7 +82,7 @@ ul{
 }
 
 .super_pickme {
-    display: block:
+    display: block;
     border-radius: 25px;
     border: 1px solid #5B8FFF;
     padding: 0.35rem;
@@ -93,7 +93,7 @@ ul{
 }
 
 .red-pickme {
-    display: block:
+    display: block;
     border-radius: 25px;
     border: 1px solid #F55050;
     padding: 0.35rem;
@@ -104,7 +104,7 @@ ul{
 }
 
 .history {
-    display: block:
+    display: block;
     border-radius: 25px;
     border: 1px solid #999999;
     padding: 0.35rem;
