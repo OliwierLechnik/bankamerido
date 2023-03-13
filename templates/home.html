@@ -5,8 +5,8 @@
         <h1>Witaj {{ name }}!</h1>
     </div>
    <div class="row tabela text-start">
-       <div class="col-8 bolt"><p>Rachunek</p></div>
-       <div class="col-4 bolt text-center"><p>Saldo</p></div>
+       <div class="col-8 bolt tabela-title"><p>Rachunek</p></div>
+       <div class="col-4 bolt text-center tabela-title"><p>Saldo</p></div>
    </div>
    {% for acc in accs %}
    <div class="row tabela mt-3">
@@ -24,7 +24,7 @@
        <div class="col-4 text-center"><p>--</p></div>
    </div>
    {% endfor %}
-   <div class="col-12 col-sm-6 mt-3 text-center">
+   <div class="col-12 col-sm-auto mt-3 text-center">
        <a href="new/" class="pickme">Nowy rachunek</a>
        {% if super %}
        <a href="accept_account/" class="super_pickme">Proźby o rachunek</a>
