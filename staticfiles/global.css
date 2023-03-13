@@ -79,7 +79,20 @@ ul{
     text-decoration:none;
     line-height: 3rem;
 }
-
+.col-4.bolt.text-center > p {
+    position: relative;
+    top: 25%;
+}
+.tabela-title > p {
+    font-size: 1.333rem;
+}
+.tabela-title {
+    padding-top: 0.5rem;
+}
+.col-8.bolt > p {
+    position: relative;
+    top: 25%;
+}
 .super_pickme {
     /* display: block; */
     border-radius: 8px;
