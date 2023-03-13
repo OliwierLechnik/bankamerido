@@ -89,6 +89,9 @@ ul{
 .tabela-title {
     padding-top: 1rem;
 }
+.opcje.text-justify.mt-5 {
+    text-align: center;
+}
 .col-12.col-sm-auto.mt-3.text-center {
     padding-top: 2rem;
 }
