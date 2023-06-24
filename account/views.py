@@ -145,7 +145,7 @@ def accept_account_view(req):
         target = get_object_or_404(Account,id=id)
         if not target.active:
             if action == 'yes':
-                target.active = True;
+                target.active = True
                 target.save()
             elif action == 'no':
                 target.delete()

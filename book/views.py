@@ -74,17 +74,27 @@ def whole_history_view(req, acc_id):
     }
 
     global_history = []
-    for book in Book.objects.all().order_by('-id')[:25]:
-        sender = Account.objects.get(id=book.sender_id)
-        receiver = Account.objects.get(id=book.receiver_id)
-        sender_owner = User.objects.get(username=sender.owner)
-        receiver_owner = User.objects.get(username=receiver.owner)
+    for book in Book.objects.all().order_by('-id'):
+        try:
+            sender = Account.objects.get(id=book.sender_id)
+            sender_owner = User.objects.get(username=sender.owner)
+            sender_txt = f'{sender_owner.first_name} {sender_owner.last_name} - {sender.name}'
+        except:
+            sender_txt = f'Konto usunięte id={book.sender_id}'
+
+        try:
+            receiver = Account.objects.get(id=book.receiver_id)
+            receiver_owner = User.objects.get(username=receiver.owner)
+            receiver_txt = f'{receiver_owner.first_name} {receiver_owner.last_name} - {receiver.name}'
+        except:
+            receiver_txt = f'Konto usunięte id={book.sender_id}'
+
         global_history.append(
             {
                 'title': book.title,
                 'date': datetime.strftime(book.date, '%d-%m-%Y'),
-                'sender': f'{sender_owner.first_name} {sender_owner.last_name} - {sender.name}',
-                'receiver': f'{receiver_owner.first_name} {receiver_owner.last_name} - {receiver.name}',
+                'sender': sender_txt,
+                'receiver': receiver_txt,
                 'value': book.value,
                 'id': book.id,
                 'type': slownik.get(book.type)
@@ -92,7 +102,7 @@ def whole_history_view(req, acc_id):
         )
 
     data = {
-        'history': global_history,
+        'history': global_history
     }
 
     return render(req, 'history.html', data)
