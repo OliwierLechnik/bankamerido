@@ -74,7 +74,7 @@ def whole_history_view(req, acc_id):
     }
 
     global_history = []
-    for book in Book.objects.all():
+    for book in Book.objects.all().order_by('-id')[:25]:
         sender = Account.objects.get(id=book.sender_id)
         receiver = Account.objects.get(id=book.receiver_id)
         sender_owner = User.objects.get(username=sender.owner)
@@ -92,7 +92,7 @@ def whole_history_view(req, acc_id):
         )
 
     data = {
-        'history': sorted(global_history, key=lambda x: x.get('id'), reverse=True),
+        'history': global_history,
     }
 
     return render(req, 'history.html', data)
