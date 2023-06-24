@@ -33,7 +33,7 @@ urlpatterns = [
     path('account/<int:acc_id>/super_transfer/', super_transfer_view),
     path('account/all_accounts/', all_accounts_view),
     path('account/accept_account/', accept_account_view),
-    path('account/<int:acc_id>/history/', whole_history_view),
+    path('account/<int:acc_id>/history/<int:page>', whole_history_view),
     path('account/<int:acc_id>/transfer/', regular_transfer_view),
     path('logout/', logout_view)
 ]

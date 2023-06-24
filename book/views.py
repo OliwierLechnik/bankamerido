@@ -55,7 +55,8 @@ def regular_transfer_view(req, acc_id):
     return render(req, 'transfer.html', data)
 
 
-def whole_history_view(req, acc_id):
+def whole_history_view(req, acc_id, page):
+    chunk = 25
     acc = get_object_or_404(Account, id=acc_id)
 
     if not req.user.is_authenticated:
@@ -74,7 +75,7 @@ def whole_history_view(req, acc_id):
     }
 
     global_history = []
-    for book in Book.objects.all().order_by('-id'):
+    for book in Book.objects.all().order_by('-id')[chunk*(page-1):chunk*page]:
         try:
             sender = Account.objects.get(id=book.sender_id)
             sender_owner = User.objects.get(username=sender.owner)
@@ -102,7 +103,9 @@ def whole_history_view(req, acc_id):
         )
 
     data = {
-        'history': global_history
+        'history': global_history,
+        'prev': page-1 if page-1 > 0 else 1,
+        'next': page+1
     }
 
     return render(req, 'history.html', data)
