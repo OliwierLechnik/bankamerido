@@ -55,17 +55,20 @@ def account_detailed_view(req, acc_id):
 
     slownik = {
         'regular_transfer': 'Przelew',
-        'super_transfer': 'Zajęcie komornicze',
-        'deposit': 'Wpłata',
-        'withdraw': 'Wypłata',
+        'super_transfer': 'Super przelew',
+        'deposit': 'Dodaj pieniądz',
+        'withdraw': 'Usuń pieniądz',
         'debt_collection': 'Windykacja',
     }
 
     history = []
     for transfer in incoming:
-        target = Account.objects.get(id = transfer.sender_id)
-        user = User.objects.get(username = target.owner)
-        subtitle = f'{user.first_name} {user.last_name} - {target.name}'
+        try:
+            target = Account.objects.get(id = transfer.sender_id)
+            user = User.objects.get(username = target.owner)
+            subtitle = f'{user.first_name} {user.last_name} - {target.name}'
+        except:
+            subtitle = f'Konto usunięte id={transfer.sender_id}'
         history.append(
             {
                 'title': transfer.title,
@@ -78,9 +81,12 @@ def account_detailed_view(req, acc_id):
         )
 
     for transfer in outgoing:
-        target = Account.objects.get(id = transfer.receiver_id)
-        user = User.objects.get(username = target.owner)
-        subtitle = f'{user.first_name} {user.last_name} - {target.name}'
+        try:
+            target = Account.objects.get(id = transfer.sender_id)
+            user = User.objects.get(username = target.owner)
+            subtitle = f'{user.first_name} {user.last_name} - {target.name}'
+        except:
+            subtitle = f'Konto usunięte id={transfer.sender_id}'
         history.append(
             {
                 'title': transfer.title,
@@ -111,11 +117,11 @@ def account_detailed_view(req, acc_id):
             'address': 'super_transfer/'
         },
         {
-            'name': 'Wypłata',
+            'name': 'Usuń pieniądz',
             'address': 'withdraw/'
         },
         {
-            'name': 'Wpłata',
+            'name': 'Dodaj pieniądz',
             'address': 'deposit/'
         },
     ]
@@ -183,6 +189,7 @@ def all_accounts_view(req):
                 'balance': r.balance
             }
         )
+    pary = sorted(pary, key=lambda x: x['balance'], reverse=True)[1:]
     data = {
         'konta': pary,
     }
