@@ -1,4 +1,12 @@
 db.sqlite3
+**/__pycache__/*
+**/**/__pycache__/*
+account/migrations/__pycache__/*
+book/migrations/__pycache__/*
+book/__pycache__/*
+account/__pycache__/*
+bankamerido/__pycache__/*
+login/__pycache__/*
 **/__pycache__
 **/**/__pycache__
 account/migrations/__pycache__
