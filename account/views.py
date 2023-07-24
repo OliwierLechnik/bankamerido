@@ -82,11 +82,11 @@ def account_detailed_view(req, acc_id):
 
     for transfer in outgoing:
         try:
-            target = Account.objects.get(id = transfer.sender_id)
+            target = Account.objects.get(id = transfer.receiver_id)
             user = User.objects.get(username = target.owner)
             subtitle = f'{user.first_name} {user.last_name} - {target.name}'
         except:
-            subtitle = f'Konto usunięte id={transfer.sender_id}'
+            subtitle = f'Konto usunięte id={transfer.receiver_id}'
         history.append(
             {
                 'title': transfer.title,
