@@ -4,14 +4,20 @@
     <div class="col-12 text-center">
         <h1 class="bolt">Wszystkie Rachunki</h1>
     </div>
-   <div class="row historia mt-4">
-       {% for k in konta %}
-       <div class="col-8 mt-3 bolt">
-           {{ k.name }}
-       </div>
-       <div class="col-4 mt-3">
-           {{ k.balance }}A
-       </div>
-       {% endfor %}
-   </div>
+    <div class="row tabela text-start">
+        <div class="col-8 bolt"><p>Rachunek</p></div>
+        <div class="col-4 bolt text-center"><p>Saldo<br>Kredyt</p></div>
+    </div>
+    {% for k in konta %}
+    <div class="row tabela mt-3">
+        <div class="col-8 mt-3 bolt">
+                {{ k.name }}
+        </div>
+        <div class="col-4 text-center mt-3 {% if k.balance < 0 %}red-crimson{% endif %}">
+        {{ k.balance }}A
+        <br>
+        <p class="white">{{ k.credit }}A</p>
+        </div>
+    </div>
+    {% endfor %}
 {% endblock %}

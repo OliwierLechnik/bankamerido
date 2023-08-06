@@ -4,7 +4,9 @@ body {
     background-color: #111111;
 }
 
-
+.red-crimson {
+    color: #DC143C;
+}
 
 #loginbox{
     color: #eeeeee;
@@ -22,8 +24,12 @@ input{
     border-style: dotted;
     border-color: #eeeeee
 }
+
+.white {
+    color: #eeeeee;
+}
 select{
-    display: block;
+    display: block:
     width: 100%;
     background-color: #111111;
     color: #eeeeee;
@@ -62,7 +68,7 @@ ul{
     border-left: 0;
     border-right: 0;
     border-style: none;
-    border-color: #eeeeee
+    border-color: #eeeeee;
     margin: 0;
 }
 

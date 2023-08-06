@@ -6,7 +6,11 @@
     </div>
    <div class="row text-center mt-5">
        <div class="col-6 bolt"><p class="h2">Saldo:</p></div>
-       <div class="col-6 bolt text-center"><p class="h2">{{ acc.balance}}A</p></div>
+       <div class="col-6 bolt text-center"><p class="h2 {% if acc.balance < 0 %}red-crimson{% endif %}">{{ acc.balance}}A</p></div>
+       {% if acc.credit > 0 %}
+       <div class="col-6 bolt"><p class="h2">Kredyt:</p></div>
+       <div class="col-6 bolt text-center"><p class="h2">{{ acc.credit}}A</p></div>
+       {% endif %}
    </div>
    <div class="opcje text-justify mt-5">
        {% if acc.super %}

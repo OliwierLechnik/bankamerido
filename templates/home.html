@@ -7,6 +7,7 @@
    <div class="row tabela text-start">
        <div class="col-8 bolt"><p>Rachunek</p></div>
        <div class="col-4 bolt text-center"><p>Saldo</p></div>
+       
    </div>
    {% for acc in accs %}
    <div class="row tabela mt-3">
@@ -15,7 +16,9 @@
        {% else %}
        <div class="col-8"><a href="{{ acc.id }}" class="pickme">{{ acc.name }}</a></div>
        {% endif %}
-       <div class="col-4 bolt text-center"><p>{{ acc.balance}}A</p></div>
+       <div class="col-4 bolt text-center {% if acc.balance < 0 %}red-crimson{% endif %}"><p>{{ acc.balance}}A</p></div>
+       
+
    </div>
    {% endfor %}
    {% for acc in waiting %}
