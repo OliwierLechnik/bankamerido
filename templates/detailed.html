@@ -14,14 +14,14 @@
    </div>
    <div class="opcje text-justify mt-5">
        {% if acc.super %}
-       <a href="history/1" class="history me-3 mt-3">Historia</a>
+       <a href="history/1" class="history">Historia</a>
        {% endif %}
        {% for opcja in opcje %}
-       <a href="{{ opcja.address }}" class="pickme me-3 mt-3">{{ opcja.name }}</a>
+       <a href="{{ opcja.address }}" class="pickme">{{ opcja.name }}</a>
        {% endfor %}
        {% if acc.super %}
            {% for opcja in super_opcje %}
-           <a href="{{ opcja.address }}" class="super_pickme me-3">{{ opcja.name }}</a>
+           <a href="{{ opcja.address }}" class="super_pickme">{{ opcja.name }}</a>
            {% endfor %}
        {% endif %}
    </div>

@@ -59,6 +59,7 @@ def account_detailed_view(req, acc_id):
         'deposit': 'Dodaj pieniądz',
         'withdraw': 'Usuń pieniądz',
         'debt_collection': 'Windykacja',
+        'debt_collection_group': 'Windykacja zbiorowa',
     }
 
     history = []
@@ -109,12 +110,16 @@ def account_detailed_view(req, acc_id):
 
     super_opcje = [
         {
+            'name': 'Super Przelew',
+            'address': 'super_transfer/'
+        },
+        {
             'name': 'Windykacja',
             'address': 'debt_collection/'
         },
         {
-            'name': 'Super Przelew',
-            'address': 'super_transfer/'
+            'name': 'Windykacja zbiorowa',
+            'address': 'debt_collection_group/'
         },
         {
             'name': 'Usuń pieniądz',

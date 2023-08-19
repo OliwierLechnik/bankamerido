@@ -12,9 +12,9 @@
    {% for acc in accs %}
    <div class="row tabela mt-3">
        {% if acc.super %}
-       <div class="col-8"><a href="{{ acc.id }}" class="super_pickme">{{ acc.name }}</a></div>
+       <div class="col-8"><a href="{{ acc.id }}" class="super_clickable">{{ acc.name }}</a></div>
        {% else %}
-       <div class="col-8"><a href="{{ acc.id }}" class="pickme">{{ acc.name }}</a></div>
+       <div class="col-8"><a href="{{ acc.id }}" class="clickable">{{ acc.name }}</a></div>
        {% endif %}
        <div class="col-4 bolt text-center {% if acc.balance < 0 %}red-crimson{% endif %}"><p>{{ acc.balance}}A</p></div>
        
@@ -27,8 +27,8 @@
        <div class="col-4 text-center"><p>--</p></div>
    </div>
    {% endfor %}
-   <div class="col-12 col-sm-6 mt-3 text-center">
-       <a href="new/" class="pickme">Nowy rachunek</a>
+   <div class="col-12 mt-3 text-center">
+       <a href="new/" class="big_pickme">Nowy rachunek</a>
        {% if super %}
        <a href="accept_account/" class="super_pickme">Proźby o rachunek</a>
        <a href="all_accounts/" class="super_pickme">Wszystkie rachunki</a>

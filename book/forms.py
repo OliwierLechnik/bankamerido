@@ -80,6 +80,28 @@ class DebtCollectionForm(forms.Form):
         )
     )
 
+class DebtCollectionGroupForm(forms.Form):
+    title = forms.CharField(
+        label='',
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Tytuł',
+            },
+        )
+    )
+    value = forms.IntegerField(
+        label='',
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'placeholder': 'Kwota',
+            },
+        )
+    )
+    zacc = None
+    # fields = ['title','value','acc']
+
 class MoneyWithdrawForm(forms.Form):
     acc = forms.ChoiceField(
         label='Konto docelowe',
