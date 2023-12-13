@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
-from .forms import RegularTransferForm, DebtCollectionForm, MoneyDepositForm, MoneyWithdrawForm, SuperTransferForm
+from .forms import RegularTransferForm, DebtCollectionForm, MoneyDepositForm, MoneyWithdrawForm, SuperTransferForm, DebtCollectionGroupForm
 from account.models import Account
-from .transfer_handler import universal_handler
+from .transfer_handler import universal_handler, group_handler
 from django.contrib.auth.models import User
 from datetime import datetime
 from django import forms
 from django.db.models.fields import BLANK_CHOICE_DASH
 
 
-def get_choises(name:str) -> list[tuple[str,str]]:
+def get_choices(name:str) -> list[tuple[str,str]]:
     accs = Account.objects.filter(active=True)
     users = User.objects.all()
 
@@ -36,7 +36,7 @@ def regular_transfer_view(req, acc_id):
         return redirect('/')
 
     form = RegularTransferForm(req.POST or None)
-    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto docelowe'))
+    form.fields['acc'] = forms.ChoiceField(choices=get_choices('Konto docelowe'))
     data = {
         'form': form,
         'name': f'{req.user.first_name} {req.user.last_name} - {acc.name}',
@@ -111,6 +111,50 @@ def whole_history_view(req, acc_id, page):
     return render(req, 'history.html', data)
 
 
+def debt_collection_group_view(req, acc_id):
+    acc = get_object_or_404(Account, id=acc_id)
+
+    if not req.user.is_authenticated:
+        return redirect('/')
+    if not acc.super:
+        return redirect('/')
+    if not req.user.username == acc.owner:
+        return redirect('/')
+
+    form = DebtCollectionGroupForm(req.POST or None)
+    c = get_choices('Konto Docelowe')[1:]
+    # for ci in c:
+    #     print(ascii(ci))
+    form.fields['zacc'] = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, 
+        required=True, 
+        choices=c
+    )
+    data = {
+        'form': form,
+        'akcja': 'Windykacja'
+    }
+    if form.is_valid():
+        clean = form.cleaned_data
+
+        value = clean.get('value')
+        title = clean.get('title')
+        debtors_id = clean.get('zacc')
+        # print(debtor_id)
+        if len(debtors_id) == 0:
+            form.errors = []
+        else:
+            error = group_handler(debtors_id, [acc_id], value, title, 'debt_collection')
+        # error = None
+
+        if error == '':
+            return redirect('../')
+        else:
+            data['error'] = error
+
+    return render(req, 'transfer.html', data)
+
+
 def debt_collection_view(req, acc_id):
     acc = get_object_or_404(Account, id=acc_id)
 
@@ -122,7 +166,7 @@ def debt_collection_view(req, acc_id):
         return redirect('/')
 
     form = DebtCollectionForm(req.POST or None)
-    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto Docelowe'))
+    form.fields['acc'] = forms.ChoiceField(choices=get_choices('Konto Docelowe'))
     data = {
         'form': form,
         'akcja': 'Windykacja'
@@ -155,7 +199,7 @@ def money_withdraw_view(req, acc_id):
         return redirect('/')
 
     form = MoneyWithdrawForm(req.POST or None)
-    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto Docelowe'))
+    form.fields['acc'] = forms.ChoiceField(choices=get_choices('Konto Docelowe'))
     data = {
         'form': form,
         'akcja': 'Wypłata środków'
@@ -190,7 +234,7 @@ def money_deposit_view(req, acc_id):
 
 
     form = MoneyDepositForm(req.POST or None)
-    form.fields['acc'] = forms.ChoiceField(choices=get_choises('Konto Docelowe'))
+    form.fields['acc'] = forms.ChoiceField(choices=get_choices('Konto Docelowe'))
     data = {
         'form': form,
         'akcja': 'Wpłata środków'
@@ -225,8 +269,8 @@ def super_transfer_view(req, acc_id):
         return redirect('/')
 
     form = SuperTransferForm(req.POST or None)
-    form.fields['source'] = forms.ChoiceField(choices=get_choises('Wybierz źródło'))
-    form.fields['destination'] = forms.ChoiceField(choices=get_choises('Wybierz odbiorce'))
+    form.fields['source'] = forms.ChoiceField(choices=get_choices('Wybierz źródło'))
+    form.fields['destination'] = forms.ChoiceField(choices=get_choices('Wybierz odbiorce'))
     data = {
         'form': form,
         'name': f'{req.user.first_name} {req.user.last_name} - {acc.name}',
