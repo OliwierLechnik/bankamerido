@@ -3,6 +3,20 @@
 {% block content %}
     <div class="col-12 text-center">
         <h1 class="bolt">{{ name }}</h1>
+        <ul>
+            {% if acc.block_incoming or acc.block_outgoing %}
+            <li>Na konto zostały nałożone ograniczenia. </li>
+            {% endif %}
+            {% if acc.block_incoming %}
+            <li>Przelewy przychodządze zostały zablokowane.</li>
+            {% endif %}
+            {% if acc.block_outgoing %}
+            <li>Przelewy wychodządze zostały zablokowane.</li>
+            {% endif %}
+            {% if acc.block_incoming or acc.block_outgoing %}
+            <li>Proszę skonsultować się z administratorem.</li>
+            {% endif %}
+        </ul>
     </div>
    <div class="row text-center mt-5">
        <div class="col-6 bolt"><p class="h2">Saldo:</p></div>

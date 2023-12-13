@@ -13,10 +13,12 @@
    <div class="row tabela mt-3">
        {% if acc.super %}
        <div class="col-8"><a href="{{ acc.id }}" class="super_pickme">{{ acc.name }}</a></div>
+       {% elif acc.block_incoming or acc.block_outgoing %}
+       <div class="col-8"><a href="{{ acc.id }}" class="red-pickme">{{ acc.name }}</a></div>
        {% else %}
        <div class="col-8"><a href="{{ acc.id }}" class="pickme">{{ acc.name }}</a></div>
        {% endif %}
-       <div class="col-4 bolt text-center {% if acc.balance < 0 %}red-crimson{% endif %}"><p>{{ acc.balance}}A</p></div>
+       <div class="col-4 bolt text-center {% if acc.balance < 0 %}red-crimson{% endif %}"><p>{{ acc.balance}}A{% if acc.block_incoming or acc.block_outgoing %}🔒{% endif %}</p></div>
        
 
    </div>

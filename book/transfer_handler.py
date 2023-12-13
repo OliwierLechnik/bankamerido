@@ -17,6 +17,8 @@ def universal_handler(sender_id, receiver_id, value, title, type) -> str:
 
     if sender_id == receiver_id:
         return 'Nie można przelać na to konto'
+    
+
 
 
     if sender.balance < value:
@@ -29,6 +31,11 @@ def universal_handler(sender_id, receiver_id, value, title, type) -> str:
         return 'Nie mozesz przelac do siebie'
     if not value > 0:
         return 'Niezła próba cwaniaczku. Kwota przelewu musi byc wieksza od zera'
+    
+    if type == 'regular_transfer' and sender.block_outgoing:
+        return 'Odmowa. Na to konto nałożone są ograniczenia. Proszę skonsultować się z administratorem.'
+    if type == 'regular_transfer' and receiver.block_incoming:
+        return 'Odmowa. Na konto docelowe nałożone są ograniczenia.'
 
     sender.balance -= value
     receiver.balance += value

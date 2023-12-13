@@ -8,4 +8,6 @@ class Account(models.Model):
     credit = models.IntegerField(default=0)
     active = models.BooleanField(default=False)
     super = models.BooleanField(default=False)
+    block_incoming = models.BooleanField(default=False)
+    block_outgoing = models.BooleanField(default=False)
 
