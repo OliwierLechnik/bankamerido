@@ -15,7 +15,9 @@ class RegularTransferForm(forms.Form):
             },
         )
     )
-    value = forms.IntegerField(
+    value = forms.DecimalField(
+        decimal_places=2,
+        max_digits=100,
         label='',
         required=True,
         widget=forms.NumberInput(
@@ -45,7 +47,9 @@ class SuperTransferForm(forms.Form):
             },
         )
     )
-    value = forms.IntegerField(
+    value = forms.DecimalField(
+        decimal_places=2,
+        max_digits=100,
         label='',
         required=True,
         widget=forms.NumberInput(
@@ -70,7 +74,9 @@ class DebtCollectionForm(forms.Form):
             },
         )
     )
-    value = forms.IntegerField(
+    value = forms.DecimalField(
+        decimal_places=2,
+        max_digits=100,
         label='',
         required=True,
         widget=forms.NumberInput(
@@ -90,7 +96,9 @@ class DebtCollectionGroupForm(forms.Form):
             },
         )
     )
-    value = forms.IntegerField(
+    value = forms.DecimalField(
+        decimal_places=2,
+        max_digits=100,
         label='',
         required=True,
         widget=forms.NumberInput(
@@ -108,7 +116,9 @@ class MoneyWithdrawForm(forms.Form):
         choices=[('', 'Docelowe konto:')],
         required=True
         )
-    value = forms.IntegerField(
+    value = forms.DecimalField(
+        decimal_places=2,
+        max_digits=100,
         label='',
         required=True,
         widget=forms.NumberInput(
@@ -123,7 +133,9 @@ class MoneyDepositForm(forms.Form):
         choices=[('', 'Docelowe konto:')],
         required=True
         )
-    value = forms.IntegerField(
+    value = forms.DecimalField(
+        decimal_places=2,
+        max_digits=100,
         label='',
         required=True,
         widget=forms.NumberInput(

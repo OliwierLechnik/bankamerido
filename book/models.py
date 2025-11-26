@@ -6,6 +6,6 @@ class Book(models.Model):
     receiver_id = models.IntegerField( )
     type = models.CharField(max_length=127,)
     title = models.CharField(max_length=127)
-    value = models.IntegerField()
+    value = models.DecimalField(max_digits=100, decimal_places=2)
     date = models.DateField(null=True, blank=True)
 

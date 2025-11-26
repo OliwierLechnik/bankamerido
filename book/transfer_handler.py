@@ -18,9 +18,6 @@ def universal_handler(sender_id, receiver_id, value, title, type) -> str:
 
     if sender_id == receiver_id:
         return 'Nie można przelać na to konto'
-    
-
-
 
     if sender.balance < value:
         return 'Brak wystarczających środków na koncie'
