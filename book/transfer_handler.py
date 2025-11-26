@@ -2,8 +2,10 @@ from account.models import Account
 from book.models import Book
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.db import transaction
 
 
+@transaction.atomic
 def universal_handler(sender_id, receiver_id, value, title, type) -> str:
 
     try:
@@ -51,6 +53,7 @@ def universal_handler(sender_id, receiver_id, value, title, type) -> str:
 
     return ''
 
+@transaction.atomic
 def group_handler(senders_id: list, receivers_id: list, value, title, type) -> str:
     def validate(iteratable, func, *args) -> list:
         """
